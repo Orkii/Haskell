@@ -1,29 +1,21 @@
 import Data.Char 
 -- ord chr
+-- 97 122
+-- 65 90
 
-shifr  :: String -> String 
 
-unshifr  :: String -> String 
---doChar :: Char -> Char
-shifr [] = ""
-shifr (hs:ts) = if ((elem (ord hs + 2) [65..90]) || (elem (ord hs + 2) [97..122]))
-				then (chr (ord hs + 2) ):(shifr ts)
-				else if ((elem (ord hs + 2) [91..92]) || (elem (ord hs + 2) [123..124]))
-					 then (chr (ord hs - 24) ):(shifr ts)
-					 else hs:(shifr ts)
-					 
-unshifr [] = ""				 
-unshifr (hs:ts) = if ((elem (ord hs - 2) [65..90]) || (elem (ord hs - 2) [97..122]))
-				then (chr (ord hs - 2) ):(shifr ts)
-				else if ((elem (ord hs - 2) [63..64]) || (elem (ord hs - 2) [95..96]))
-					 then (chr (ord hs + 24) ):(shifr ts)
-					 else hs:(shifr ts)
+shifr  :: Char -> Char
+--unshifr :: Char -> Char
 
-main str c = if c == 's' 
-			 then shifr str
-			 else unshifr str
-			 
-			 
-			 
---main str = unshifr str
 
+shifr c   | ((elem (ord c + 2) [65..90]) || (elem (ord c + 2) [97..122]))       = chr (ord c + 2)
+		  | ((elem (ord c + 2) [91..92]) || (elem (ord c + 2) [123..124])) = chr (ord c + 2 - 26)
+		  | True = c 
+
+unshifr c | ((elem (ord c - 2) [65..90]) || (elem (ord c - 2) [97..122]))       = chr (ord c - 2)
+		  | ((elem (ord c - 2) [63..64]) || (elem (ord c - 2) [95..96])) = chr (ord c - 2 + 26)
+		  | True = c 
+
+main str c | c == 's' = map shifr str
+		   | c == 'u' = map unshifr str
+		   | True = "No"
