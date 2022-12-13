@@ -13,30 +13,48 @@
 --самых последовательных простых чисел?
 
 import Debug.Trace
+import Data.List
 
-isSimple :: Int -> Int -> Bool
-
-isSimple s x | s == x = True
+isSimple :: Int -> Bool
+isSimple1 :: Int -> Int -> Bool
+isSimple1 s x | (s + 1 < x * 2) = True
 			 | mod s x == 0 = False
-             | True = isSimple s (x+1)
+             | True = isSimple1 s (x+1)
+isSimple now = isSimple1 now 2
+
 
 simpele = next 2 where
-	next x | isSimple x 2 = x:(next (x+1))
+	next x | isSimple x = x:(next (x+1))
 		   | True = (next (x+1))
 		   
 
-proc :: [Int] -> Int -> Int -> Int -> [Int]
 
+check :: (Int, Int) -> (Int, Int)
 
-proc (h:ts) i now max | now + h > max = [i]
-					| now > max = [i]
-					| h > max = [i]
-					| True = ( (proc ts i now max) ++ (proc ts (i+1) (now + h) max) )
+check (a,b) | isSimple b == True = (a,b)
+			| True = (0,0)
 
+proc  :: [Int] -> (Int, Int) -> Int -> (Int, Int)
+procS :: [Int] -> (Int, Int) -> Int -> (Int, Int)
+proc (h:ts) (i, now) max | (now + h > max) && (isSimple now) = (i, now)	
+						 | (now + h > max) = (0,0)
+						 | True = last (sort [(proc ts (0, 0) max),  (procS ts (i+1, (now + h)) max)] )
 
-
-
+procS (h:ts) (i, now) max | (now + h > max) && (isSimple now) = (i, now)	
+                          | (now + h > max) 				  = (0,0)
+						  | True = last (sort [(check(i, now)) , (procS ts (i+1, (now + h)) max)] )
+						  
+--roc  :: [Int] -> (Int, Int) -> Int -> [(Int, Int)]
+--rocS :: [Int] -> (Int, Int) -> Int -> [(Int, Int)]
+--proc (h:ts) (i, now) max | (now + h > max) && (isSimple now) = [(i, now)]	
+--						 | (now + h > max) = []
+--						 | True = (proc ts (0, 0) max) ++ (procS ts (i+1, (now + h)) max) 
+--
+--procS (h:ts) (i, now) max | (now + h > max) && (isSimple now) = [(i, now)]	
+--                          | (now + h > max) 					= []
+--						  | True = (check(i, now)) ++ (procS ts (i+1, (now + h)) max) 
 
 --main = take 100 simpele  
-main = proc simpele 0 0 100
-main1 = take 30 simpele 
+main3 x = proc simpele (0, 0) x
+--main2 = take 30 (proc simpele (0, 0) 100)
+--main1 = take 30 simpele 
