@@ -8,3 +8,23 @@
 --
 --Найдите последние девять цифр суммы всех n,
 --0 < n < 1020, таких, что f(n) является полным квадратом.
+--142989277
+
+
+f :: Int -> Int
+--ps :: Int -> Bool
+
+f 0 = 0
+f x = (mod x 10) ^ 2 + f (div x 10)
+
+ff = next 1 where
+	next x = (f x):(next (x+1))
+
+
+fun :: Int -> Int
+fun x = sum (take x ff)
+
+main x= fun x
+
+main1 x = mod (floor x) (floor (sqrt x))
+main2 x = mod (floor x) (floor x)
