@@ -1,6 +1,6 @@
 --Строки исходного файла, содержащие заданное слово.  
 -- \n
-
+import Data.List
 
 splitBy1    :: (Char -> Bool) -> String -> [String]
 splitBy    :: (Char -> Bool) -> String -> [String]
@@ -20,20 +20,31 @@ splitBy1 f [] = []
 splitBy1 f ts = (getWord f ts):(splitBy1 f (removeWord f ts))
 splitBy f ts = filter (\x -> not(x == "")) (splitBy1 f ts)
 
+findSubstr xs ys = findIndex (isPrefixOf xs) (tails ys)
 
 
-main :: IO ()
-main = do
-    contents <- readFile "Test.txt"
-    writeFile "Test2.txt" (process contents)
 
-process :: String -> String
+process :: String -> String -> String
 --elem
 
-getstrs :: [String] -> [String]
+getstrs :: [String] -> String -> [String]
 
-getstrs str | 
-			| 
+getstrs [] str = []
+					 
+					 
+getstrs (h:strs) str | findSubstr str h  == Nothing = getstrs strs str 
+					 | True = h:(getstrs strs str)
 
 
-process str = splitBy (\x -> x == '\n') str
+compact :: [String] -> String
+
+compact [] = []
+compact (h:ts) = h ++ "\n" ++ (compact ts) 
+
+process str a = compact (getstrs (splitBy (\x -> x == '\n') str) a)
+
+
+main :: String -> IO ()
+main a = do
+    contents <- readFile "Test.txt"
+    writeFile "Test2.txt" (process contents a)

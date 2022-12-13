@@ -11,3 +11,32 @@
 --Какое простое число меньше миллиона 
 --можно представить в виде суммы 
 --самых последовательных простых чисел?
+
+import Debug.Trace
+
+isSimple :: Int -> Int -> Bool
+
+isSimple s x | s == x = True
+			 | mod s x == 0 = False
+             | True = isSimple s (x+1)
+
+simpele = next 2 where
+	next x | isSimple x 2 = x:(next (x+1))
+		   | True = (next (x+1))
+		   
+
+proc :: [Int] -> Int -> Int -> Int -> [Int]
+
+
+proc (h:ts) i now max | now + h > max = [i]
+					| now > max = [i]
+					| h > max = [i]
+					| True = ( (proc ts i now max) ++ (proc ts (i+1) (now + h) max) )
+
+
+
+
+
+--main = take 100 simpele  
+main = proc simpele 0 0 100
+main1 = take 30 simpele 
