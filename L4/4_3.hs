@@ -18,14 +18,15 @@ import Data.List
 isSimple :: Int -> Bool
 isSimple1 :: Int -> Int -> Bool
 isSimple1 s x | (s + 1 < x * 2) = True
-			 | mod s x == 0 = False
-             | True = isSimple1 s (x+1)
+			  | mod s x == 0 = False
+              | True = isSimple1 s (x+1)
 isSimple now = isSimple1 now 2
 
+--isSimple k = if k > 1 then null [ x | x <- [2..k - 1], k `mod` x == 0] else False
 
-simpele = next 2 where
-	next x | isSimple x = x:(next (x+1))
-		   | True = (next (x+1))
+simpele = 2:next 3 where
+	next x | isSimple x = x:(next (x+2))
+		   | True = (next (x+2))
 		   
 
 
