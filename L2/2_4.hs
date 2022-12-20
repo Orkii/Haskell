@@ -1,7 +1,3 @@
-
-
-
-
 not_ :: [Int] -> [Int]
 or_  :: [Int] -> [Int] -> [Int]
 tri_ :: [Int] -> [Int] -> [Int]

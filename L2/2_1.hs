@@ -8,11 +8,11 @@ checkA :: String -> Bool
 checkB :: String -> Bool
 
 countUpper :: String -> Int
-countLower :: String -> Int
+--countLower :: String -> Int
 
 
 countUpper [] = 0
---countUpper (hs:ts) = if isUpper hs then 1 + countUpper(ts) else countUpper(ts)
+countUpper (hs:ts) = if isUpper hs then 1 + countUpper(ts) else countUpper(ts)
 
 
 checkA str = (elem '_' str) && not(last str == '_') && not(head str == '_')

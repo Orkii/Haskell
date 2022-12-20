@@ -1,11 +1,7 @@
 import Data.Char 
--- ord chr
--- 97 122
--- 65 90
-
 
 shifr  :: Char -> Char
---unshifr :: Char -> Char
+unshifr :: Char -> Char
 
 
 shifr c   | ((elem (ord c + 2) [65..90]) || (elem (ord c + 2) [97..122]))       = chr (ord c + 2)
