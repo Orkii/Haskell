@@ -19,4 +19,7 @@ doThing :: [(Int, Int) -> Bool] -> [(Int, Int)] -> [Bool]
 doThing [] h = []
 doThing (f:tf) h = (and (map f h)) : (doThing tf h)
 
-main = doThing [p1, p2, p3, p4, p5] [(1,2),(3,3),(4,5),(12,23)]
+doThing1 :: [(Int, Int) -> Bool] -> [(Int, Int)] -> [Bool]
+doThing1 t h = map (\a -> (and (map a h))) t
+
+main x = doThing1 [p1, p2, p3, p4, p5] x

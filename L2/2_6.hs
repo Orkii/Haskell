@@ -61,3 +61,8 @@ smartSum s1 =trace "smartSum s1" mySum (filter (\xs -> (xs /=' ')) (getBefore s1
 main i1 = trace "123 " (smartSum i1)
 
 
+26 +
+32 +
+33 
+34 +
+35 

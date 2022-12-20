@@ -21,25 +21,18 @@ rimToInt c | c == 'I'  = 1
 		   | c == 'M'  = 1000
 		   | True = error "SMTH go wrong"
 		   
-
 conver8_10 "" = 0
 conver8_10 (h:st) = (digitToInt h) * (8 ^ length st) + (conver8_10 st)
-
 
 converX_10 "" = 0
 converX_10  (a:(h:st)) | (rimToInt a) < (rimToInt h) 	= (converX_10 (h:st)) - (rimToInt a)
 					   | True 							= (converX_10 (h:st)) + (rimToInt a)
-						 
+					 
 converX_10  (h:st) = (converX_10 st) + (rimToInt h)
-
-						 
+					 
 converX_10_ (a:(h:st)) = (rimToInt h) + (converX_10 st)
 
-
 mySum i1 i2 = (conver8_10 i1) + (converX_10 i2)
-
-
-
 
 getBefore (h:st) | h == '+' = "" 
 				 | True = (h:getBefore st)
@@ -50,12 +43,8 @@ getAfter (h:st) = getAfter st
 
 smartSum s1 = mySum (filter (\xs -> (xs /=' ')) (getBefore s1)) (filter (\xs -> (xs /=' ')) (getAfter s1))
 
-
---filter (\xs -> (xs /=' '))
---
 main i1 = smartSum i1
---main i1 = converX_10 i1
---main i1 i2 = mySum i1 i2
---
 
+
+ 
  
