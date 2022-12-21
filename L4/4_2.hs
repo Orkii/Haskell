@@ -3,27 +3,7 @@
 import Data.List
 import Debug.Trace
 
---getWord    :: String -> Char -> (String, String)
---
---getWord ts a |snd ee == "" = (fst ee, "")
---			 |True = (fst ee, (tail.snd) ee)
---	where ee = span (\x -> not (x == a)) ts
---
---
---
---getWords [] a = []
---getWords ts a = fst ee : (getWords (snd ee) a)
---	where ee = getWord ts a
---
---
---  x a = filter (\x -> not (x == "")) (getWords (x ++ " ") a)
---
---process :: String -> String -> String
---compact :: [String] -> String
-
 compact ts = foldr (\x y -> x ++"\n" ++ y) ""  ts
-
---process str a = (compact (filter (\x -> any (True==) (map (\y -> y == a) (splitOneOf " " x)) ) (splitOneOf "\n" str ))  )
 
 process str a =    compact( filter (\x -> any (True==) (map (\y -> y == a) (splitOneOf " " x) )) (splitOneOf "\n" str))
 

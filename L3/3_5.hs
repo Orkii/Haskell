@@ -1,7 +1,4 @@
 import  Data.List 
-
-
-
 main x = filter (\x -> not (x == "")) (splitOneOf " ,.!?" x)
 
 
